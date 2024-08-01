@@ -36,7 +36,7 @@ app.use("/images", express.static("upload/images"));
 app.post("/upload", upload.single("product"), (req, res) => {
   res.json({
     success: 1,
-    image_url: `http://localhost:${PORT}/images/${req.file.filename}`,
+    image_url: `https://wish-backend.onrender.com/images/${req.file.filename}`,
   });
 });
 
@@ -274,27 +274,27 @@ app.post("/getcart", fetchUser, async (req, res) => {
 //API endpoint to remove all products from cart
 
 // API endpoint to remove all products from cart
-app.post("/orderplaced", fetchUser, async (req, res) => {
-  try {
-    console.log("All products from cart are removed");
+// app.post("/orderplaced", fetchUser, async (req, res) => {
+//   try {
+//     console.log("All products from cart are removed");
 
-    let userData = await Users.findOne({ _id: req.user.id });
-    if (userData) {
-      for (let productId in userData.cartData) {
-        userData.cartData[productId] = 0;
-      }
+//     let userData = await Users.findOne({ _id: req.user.id });
+//     if (userData) {
+//       for (let productId in userData.cartData) {
+//         userData.cartData[productId] = 0;
+//       }
 
-      await userData.save();
+//       await userData.save();
 
-      res.json({ success: true, message: "Cart cleared", userData });
-    } else {
-      res.status(404).json({ success: false, message: "User not found" });
-    }
-  } catch (error) {
-    console.error("Error clearing cart:", error);
-    res.status(500).json({ success: false, message: "Internal server error" });
-  }
-});
+//       res.json({ success: true, message: "Cart cleared", userData });
+//     } else {
+//       res.status(404).json({ success: false, message: "User not found" });
+//     }
+//   } catch (error) {
+//     console.error("Error clearing cart:", error);
+//     res.status(500).json({ success: false, message: "Internal server error" });
+//   }
+// });
 
 //PORT
 
